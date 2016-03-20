@@ -1,13 +1,31 @@
+import random
+
+def find_e(primeList, n):
+
+    for i in range(len(primeList)):
+        if (n%primeList[i]==0):
+            find_e(primeList, n)
+        else:
+            return primeList[i]
+    
 def relative_prime_checker(n):
-    for i in range(1, n):
-        if (n%i !=0):
-            for j in range(1, i//2):
-                if ((n%j != 0) and (i%j !=0)):
-                    return i
+    primeList = []
+
+    for num in range(1,n):
+        prime = True
+        for i in range(2,num):
+            if (num%i==0):
+                prime = False
+            if prime:
+                primeList.append(num)
+    random.shuffle(primeList)
+    return(find_e(primeList, n))
+
+#def private_key(e, n):
 
 def RSA(p, q):
+    N = p*q
     n = (p-1)*(q-1)
-    print(relative_prime_checker(n))
+    e = (relative_prime_checker(n))
 
-RSA(257, 337)
-    
+RSA(11, 13)
