@@ -21,11 +21,18 @@ def relative_prime_checker(n):
     random.shuffle(primeList)
     return(find_e(primeList, n))
 
-#def private_key(e, n):
+def key_generator(e, n):
+    return e^(-1)%(n)
 
-def RSA(p, q):
+def encrypt(d, n, M):
+    return ((M^d)%n)
+
+def RSA(p, q, M):
     N = p*q
     n = (p-1)*(q-1)
     e = (relative_prime_checker(n))
+    d = key_generator(e, n)
+    print(encrypt(d, n, M))
+    
 
-RSA(11, 13)
+RSA(11, 13, 10)
